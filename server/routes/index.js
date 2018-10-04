@@ -14,4 +14,14 @@ router.get('/', (req, res) => {
   });
 });
 
+/**
+ * This function is the demonstration of user authentication
+ */
+router.post('authenticateUser', (req, res) => {
+  let username = req.body.username;
+  let password = req.body.password;
+
+  res.send(username == 'demo');
+})
+
 module.exports = router;
