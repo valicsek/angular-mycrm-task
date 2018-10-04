@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
   axios.get(config.server.api.url).then(body => {
     res.json(body.data);
   }).catch(err => {
-    res.send(err);
+    res.sendStatus(500).send(err);
   });
 });
 
