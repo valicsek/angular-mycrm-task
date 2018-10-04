@@ -4,6 +4,7 @@
   "description": "Server side of the application",
   "main": "index.js",
   "dependencies": {
+    "axios": "^0.18.0",
     "express": "^4.16.3",
     "nodemon": "^1.18.4"
   },
