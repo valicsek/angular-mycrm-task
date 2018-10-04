@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { LoginComponent } from './login/login.component';
 
 const ROUTE_PATHS = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -14,7 +15,8 @@ const ROUTE_PATHS = [
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent
+    DashboardComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
