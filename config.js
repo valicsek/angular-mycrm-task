@@ -8,5 +8,9 @@ module.exports = {
     api: {
       url: 'https://jsonplaceholder.typicode.com/todos/1'
     }
+  },
+  client: {
+    port: 4200,
+    url: 'http://localhost:4200',
   }
 };
