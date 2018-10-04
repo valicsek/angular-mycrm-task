@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { AgmCoreModule } from '@agm/core';
 
 const ROUTE_PATHS = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -19,7 +20,10 @@ const ROUTE_PATHS = [
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot(ROUTE_PATHS)
+    RouterModule.forRoot(ROUTE_PATHS),
+    AgmCoreModule.forRoot({
+      apiKey: ''
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
