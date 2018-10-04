@@ -1,5 +1,9 @@
-<h1>Welcome for dashboard!</h1>
-<agm-map [latitude]="latitude" [longitude]="longitude">
-  <agm-marker *ngFor="let marker of markers;" [latitude]="marker.latitude" [longitude]="marker.longitude">
-  </agm-marker>
-</agm-map>
+<h1>Dashboard</h1>
+
+<mat-card>
+  <agm-map [latitude]="latitude" [longitude]="longitude">
+    <agm-marker *ngFor="let marker of markers;" [latitude]="marker.latitude" [longitude]="marker.longitude" [id]="marker.id"
+      (markerClick)="onMarkerClicked($event)">
+    </agm-marker>
+  </agm-map>
+</mat-card>

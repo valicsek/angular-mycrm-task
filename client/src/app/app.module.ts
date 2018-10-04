@@ -7,6 +7,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AgmCoreModule } from '@agm/core';
 
+// UI PART
+import { MatCardModule } from '@angular/material/card';
+
 const ROUTE_PATHS = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent }
@@ -23,7 +26,9 @@ const ROUTE_PATHS = [
     RouterModule.forRoot(ROUTE_PATHS),
     AgmCoreModule.forRoot({
       apiKey: ''
-    })
+    }),
+
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
