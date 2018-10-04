@@ -1,2 +1,5 @@
 <h1>Welcome for dashboard!</h1>
-<agm-map [latitude]="latitude" [longitude]="longitude"></agm-map>
+<agm-map [latitude]="latitude" [longitude]="longitude">
+  <agm-marker *ngFor="let marker of markers;" [latitude]="marker.latitude" [longitude]="marker.longitude">
+  </agm-marker>
+</agm-map>
