@@ -14,3 +14,6 @@ You can find the complete SugarCRM API documentation here.
 Relevant examples: Authentication, filtering records, fetch related records.
 
 Auto generated API documentation: https://e7920-93.mycrmspace.de/rest/v10/help
+
+# My approach
+So basically, I prefer to separate the server side and a client side to another ports.
