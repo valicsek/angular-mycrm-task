@@ -22,4 +22,13 @@ export class AuthService {
         password
       });
   }
+
+  /**
+   * This function logs out the user
+   */
+  logOutTheUser() {
+    if (this.isLoggedIn) {
+      this.cookieService.delete('username');
+    }
+  }
 }
