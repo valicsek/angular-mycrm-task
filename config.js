@@ -10,7 +10,7 @@ module.exports = {
     /** Api property contains the necessary information for api call */
     api: {
       /** The url of the REST API server */
-      url: 'https://e7920-93.mycrmspace.de/rest/v10/',
+      url: 'https://e7920-93.mycrmspace.de/rest/v10',
       /** The username for the oAuth Authentication */
       username: 'david',
       /** The password for oAuth Authentication */
