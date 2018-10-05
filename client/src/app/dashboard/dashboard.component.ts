@@ -7,8 +7,13 @@ import { MapService } from '../map.service';
     styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+    /** The start latitude of the map */
     latitude = 12;
+    /** The start longitude of the map */
     longitude = 23;
+    /** The zoom of the map */
+    zoom = 3;
+    /** This variable contains the markers of the map */
     markers = [];
 
     constructor(

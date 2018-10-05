@@ -3,7 +3,7 @@
 </mat-toolbar>
 
 <mat-card>
-  <agm-map [latitude]="latitude" [longitude]="longitude">
+  <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
     <agm-marker *ngFor="let marker of markers;" [latitude]="marker.latitude" [longitude]="marker.longitude" [id]="marker.id"
       (markerClick)="onMarkerClicked($event)">
     </agm-marker>
