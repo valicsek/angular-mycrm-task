@@ -14,7 +14,7 @@ const ROUTE_PATHS = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: '**', redirectTo: '', pathMatch: 'full' } // If the user requests something irrelevant like /asgkng, we should handle it.
+  { path: '**', redirectTo: '', pathMatch: 'full', canActivate: [AuthGuard] } // If the user requests something irrelevant like /asgkng, we should handle it.
 ]
 
 @NgModule({
