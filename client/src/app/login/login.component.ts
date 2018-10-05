@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
-
+import { CookieService } from 'ngx-cookie-service';
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
@@ -11,7 +11,8 @@ export class LoginComponent implements OnInit {
 
     constructor(
         private Auth: AuthService,
-        private router: Router
+        private router: Router,
+        private cookieService: CookieService
     ) { }
 
     ngOnInit() {
@@ -31,6 +32,7 @@ export class LoginComponent implements OnInit {
         if (username && password) {
             this.Auth.authenticateUser(username, password).subscribe(data => {
                 if (data['success']) {
+                    this.cookieService.set('username', username);
                     this.router.navigate(['dashboard']);
                 } else alert('Username or password is not correct');
             });
