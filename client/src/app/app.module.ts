@@ -9,7 +9,7 @@ import { AgmCoreModule } from '@agm/core';
 
 // UI PART
 import { MatCardModule } from '@angular/material/card';
-
+import { MatToolbarModule, MatToolbarBase } from '@angular/material/toolbar';
 const ROUTE_PATHS = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent }
@@ -28,7 +28,8 @@ const ROUTE_PATHS = [
       apiKey: ''
     }),
 
-    MatCardModule
+    MatCardModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
