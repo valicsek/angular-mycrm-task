@@ -16,6 +16,11 @@ export class DashboardComponent implements OnInit {
     /** This variable contains the markers of the map */
     markers = [];
 
+    /** This variable contains the selected account */
+    selectedAccount = null;
+    /** This variable contains the selected opportuniy from the map */
+    selectedOpportunity = null;
+
     constructor(
         private mapService: MapService
     ) { }
@@ -45,6 +50,16 @@ export class DashboardComponent implements OnInit {
     onMarkerClicked(event) {
         let marker_id = event.id();
         if (marker_id) {
+            this.selectedOpportunity = {
+                id: marker_id,
+                name: "Opportunity name",
+                sales_stage: "Sales stage",
+                amount: 123 * marker_id
+            }
+            this.selectedAccount = {
+                name: "Account name",
+                address: "Country Postal Code City Name Street"
+            }
         }
     }
 }

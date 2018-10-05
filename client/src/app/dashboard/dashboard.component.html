@@ -1,11 +1,29 @@
 <mat-toolbar color="primary">
   Dashboard
 </mat-toolbar>
-
 <mat-card>
-  <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
-    <agm-marker *ngFor="let marker of markers;" [latitude]="marker.latitude" [longitude]="marker.longitude" [id]="marker.id"
-      (markerClick)="onMarkerClicked($event)">
-    </agm-marker>
-  </agm-map>
+  <mat-grid-list cols="2" rowheight="200px">
+    <mat-grid-tile>
+      <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+        <agm-marker *ngFor="let marker of markers;" [latitude]="marker.latitude" [longitude]="marker.longitude" [id]="marker.id"
+          (markerClick)="onMarkerClicked($event)">
+        </agm-marker>
+      </agm-map>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-list role="list">
+        <mat-list-item role="listitem">
+          <h1>Account details</h1>
+        </mat-list-item>
+        <mat-list-item role="listitem">Account name: {{selectedAccount.name}} </mat-list-item>
+        <mat-list-item role="listitem">Account details: {{selectedAccount.address}} </mat-list-item>
+        <mat-list-item role="listitem">
+          <h1>Opportunity details</h1>
+        </mat-list-item>
+        <mat-list-item role="listitem">Opportunity name: {{selectedOpportunity.name}}</mat-list-item>
+        <mat-list-item role="listitem">Sales stage: {{selectedOpportunity.sales_stage}}</mat-list-item>
+        <mat-list-item role="listitem">Amount: {{selectedOpportunity.amount}}</mat-list-item>
+      </mat-list>
+    </mat-grid-tile>
+  </mat-grid-list>
 </mat-card>

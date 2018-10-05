@@ -25,7 +25,8 @@ const authSugar = (req, res, next) => {
       grant_type: "password",
       client_id: "sugar",
       username: config.server.api.username,
-      password: config.server.api.password
+      password: config.server.api.password,
+      platform: "custom"
     }
   }
 

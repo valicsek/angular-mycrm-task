@@ -12,9 +12,9 @@ router.post('/getOpportunityMarkers', (req, res) => {
   let markers = []
   for (let i = 0; i < 99; i++) {
     markers.push({
+      id: i,
       longitude: Math.floor(Math.random() * 200),
       latitude: Math.floor(Math.random() * 200),
-      id: i
     });
   }
   res.json(markers);
