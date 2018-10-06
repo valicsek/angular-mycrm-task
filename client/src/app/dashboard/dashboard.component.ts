@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MapService } from '../map.service';
+import { Account } from '../models/account.model';
+import { Opportunity } from '../models/opportunity.model';
 
 @Component({
     selector: 'app-dashboard',
@@ -14,7 +16,7 @@ export class DashboardComponent implements OnInit {
     /** The zoom of the map */
     zoom = 3;
     /** This variable contains the markers of the map */
-    markers = [];
+    markers: Opportunity;
 
     /** This variable contains the selected account */
     selectedAccount = null;
@@ -30,15 +32,16 @@ export class DashboardComponent implements OnInit {
             this.markers = data;
         });
 
-        let options = {
-            country: 'Hungary',
-            postalcode: 1234,
-            city: 'City',
-            street: 'Street name',
-            state: 'State'
-        };
+        let account: Account = {
+            name: "Account name",
+            billing_address_city: "City",
+            billing_address_country: "Country",
+            billing_address_postalcode: 1234,
+            billing_address_state: "State",
+            billing_address_street: "Street"
+        }
 
-        this.mapService.getLonLatByAddress(options).subscribe((data) => {
+        this.mapService.getLonLatByAddress(account).subscribe((data) => {
             // TODO: Implement the get Longitude latitude address.
         });
 

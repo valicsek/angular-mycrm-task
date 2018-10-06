@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Account } from './models/account.model';
 
 @Injectable({
     providedIn: 'root'
@@ -23,9 +24,9 @@ export class MapService {
      * This function helps to determine the longitude and latitude according to options
      * @param options The specification of the address
      */
-    getLonLatByAddress(options: { country: string, postalcode: number, state: any, city: string, street: string }) {
+    getLonLatByAddress(account: Account) {
         return this.http.post('http://localhost:1995/getLonLatByAddress', {
-            options
+            account
         });
     }
 }
