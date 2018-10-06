@@ -2,11 +2,19 @@
   Dashboard
 </mat-toolbar>
 <mat-card>
+  <mat-list role="list">
+    <mat-list-item role="listitem">
+      <h1>Account List</h1>
+    </mat-list-item>
+    <mat-list-item role="listitem" *ngFor="let account of accounts;">
+      {{account.name}}
+    </mat-list-item>
+  </mat-list>
   <mat-grid-list cols="2" rowheight="200px">
     <mat-grid-tile>
       <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
-        <agm-marker *ngFor="let marker of markers;" [latitude]="marker.latitude" [longitude]="marker.longitude" [id]="marker.id"
-          (markerClick)="onMarkerClicked($event)">
+        <agm-marker *ngFor="let account of accounts;" [latitude]="account.latitude" [longitude]="account.longitude"
+          [id]="account.account_id" (markerClick)="onMarkerClicked($event)">
         </agm-marker>
       </agm-map>
     </mat-grid-tile>
@@ -16,7 +24,12 @@
           <h1>Account details</h1>
         </mat-list-item>
         <mat-list-item role="listitem">Account name: {{selectedAccount.name}} </mat-list-item>
-        <mat-list-item role="listitem">Account details: {{selectedAccount.address}} </mat-list-item>
+        <mat-list-item role="listitem">Account address:
+          {{selectedAccount.billing_address_country}}
+          {{selectedAccount.billing_address_postal_code}}
+          {{selectedAccount.billing_address_city}}
+          {{selectedAccount.billing_address_street}}
+        </mat-list-item>
         <mat-list-item role="listitem">
           <h1>Opportunity details</h1>
         </mat-list-item>

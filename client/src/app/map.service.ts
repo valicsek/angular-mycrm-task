@@ -16,8 +16,8 @@ export class MapService {
      * - An opportunity counts as open when the sales_stage is not 'Closed Won' or 'Closed Lost'.
      * example: {longitude: 1, latitude: 2}
      */
-    getOpportunityMarkers() {
-        return this.http.post('http://localhost:1995/getOpportunityMarkers', {});
+    getOpportunities() {
+        return this.http.post('http://localhost:1995/getOpportunities', {});
     }
 
     /**
@@ -28,5 +28,13 @@ export class MapService {
         return this.http.post('http://localhost:1995/getLonLatByAddress', {
             account
         });
+    }
+
+    /**
+     * This function returns the Accounts that
+     * - Accounts that have a related open opportunity of 1.000 $ or more (amount >= 1000) on a map. 
+     */
+    getAccounts() {
+        return this.http.post('http://localhost:1995/getAccounts', {});
     }
 }

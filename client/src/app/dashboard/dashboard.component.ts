@@ -15,36 +15,64 @@ export class DashboardComponent implements OnInit {
     longitude = 23;
     /** The zoom of the map */
     zoom = 3;
-    /** This variable contains the markers of the map */
-    markers: Opportunity;
-
+    /** This variable contains the accounts */
+    accounts: Account[] = [];
+    /** This variable contains the opportunities */
+    // opportunities: Opportunity[] = [];
     /** This variable contains the selected account */
-    selectedAccount = null;
+    selectedAccount: Account;
     /** This variable contains the selected opportuniy from the map */
-    selectedOpportunity = null;
+    selectedOpportunity: Opportunity;
 
     constructor(
         private mapService: MapService
     ) { }
 
     ngOnInit() {
-        this.mapService.getOpportunityMarkers().subscribe((data: any) => {
-            this.markers = data;
-        });
+        this.setupData();
+    }
+
+    /**
+     * This function initialize and request necessary services
+     */
+    private setupData() {
 
         let account: Account = {
-            name: "Account name",
-            billing_address_city: "City",
-            billing_address_country: "Country",
-            billing_address_postalcode: 1234,
-            billing_address_state: "State",
-            billing_address_street: "Street"
+            account_id: -999,
+            name: '',
+            billing_address_city: '',
+            billing_address_country: '',
+            billing_address_postalcode: 0,
+            billing_address_state: '',
+            billing_address_street: '',
+            latitude: 0,
+            longitude: 0,
+            opportunities: []
+        }
+        this.selectedAccount = account;
+
+        this.selectedOpportunity = {
+            id: -999,
+            name: '',
+            sales_status: '',
+            sales_stage: '',
+            amount: 0
         }
 
-        this.mapService.getLonLatByAddress(account).subscribe((data) => {
-            // TODO: Implement the get Longitude latitude address.
-        });
+        this.mapService.getAccounts().subscribe(
+            (data: Account[]) => this.accounts = data,
+            error => alert('Error during requesting accounts!, Do not forget to run Node.js API')
+        );
 
+        // NOTE: The getAccount backend call contains the opportunities as well.
+        // this.mapService.getOpportunities().subscribe(
+        //    (data: Opportunity[]) => this.opportunities = data,
+        //    error => alert('Error during requesting opportunity markers!, Do not forget to run Node.js API')
+        //);
+
+        // this.mapService.getLonLatByAddress(account).subscribe((data) => {
+        // TODO: Implement the get Longitude latitude address.
+        // });
     }
 
     /**
@@ -53,16 +81,8 @@ export class DashboardComponent implements OnInit {
     onMarkerClicked(event) {
         let marker_id = event.id();
         if (marker_id) {
-            this.selectedOpportunity = {
-                id: marker_id,
-                name: "Opportunity name",
-                sales_stage: "Sales stage",
-                amount: 123 * marker_id
-            }
-            this.selectedAccount = {
-                name: "Account name",
-                address: "Country Postal Code City Name Street"
-            }
+            this.selectedAccount = this.accounts.filter(account => account.account_id == marker_id)[0];
+            this.selectedOpportunity = this.selectedAccount.opportunities[0];
         }
     }
 }

@@ -7,17 +7,20 @@ const axios = require('axios');
 const config = require('../../config');
 
 
-router.post('/getOpportunityMarkers', (req, res) => {
+router.post('/getOpportunities', (req, res) => {
   // Randomly generated example data for representing it.
-  let markers = []
-  for (let i = 0; i < 99; i++) {
-    markers.push({
+  let opportunities = []
+  for (let i = 0; i < 4; i++) {
+    opportunities.push({
       id: i,
-      longitude: Math.floor(Math.random() * 200),
-      latitude: Math.floor(Math.random() * 200),
+      name: 'Opportunity' + i,
+      sales_status: "Status" + i,
+      // TODO: The exercise contains this variable, but the database not???
+      sales_stage: "Stage" + i,
+      amount: Math.floor(Math.random() * i) * 100
     });
   }
-  res.json(markers);
+  res.json(opportunities);
   return;
 
   axios.post(`${config.api.url}/Dashboards/Opportunities?max_num=-1&view_name=records`, {})
@@ -29,11 +32,8 @@ router.post('/getOpportunityMarkers', (req, res) => {
     });
 });
 
+// TODO: I need a Google API to be able to use this service.
 router.post('/getLonLatByAddress', (req, res) => {
-  res.json({
-    longitude: 42,
-    latitude: 16
-  });
   return;
 
   let options = req.body.options;
@@ -49,5 +49,44 @@ router.post('/getLonLatByAddress', (req, res) => {
         res.sendStatus(500);
       })
   }
+});
+
+/**
+ * This route calls the sugarAPI and requests the Accounts that
+ * - Accounts that have a related open opportunity of 1.000 $ or more (amount >= 1000) on a map.  
+ */
+router.post('/getAccounts', (req, res) => {
+  let name = ['Sugar', 'Apple', 'Mercedes', 'Audi', 'myCRM'];
+  let accounts = [];
+  for (let i = 0; i < Math.floor(Math.random() * 15) + 1; i++) {
+
+    let opportunities = []
+    for (let i = 0; i < 4; i++) {
+      opportunities.push({
+        id: i,
+        name: 'Opportunity' + i,
+        sales_status: "Status" + i,
+        // TODO: The exercise contains this variable, but the database not???
+        sales_stage: "Stage" + i,
+        amount: Math.floor(Math.random() * 9) * 234
+      });
+    }
+
+    accounts.push({
+      account_id: i,
+      name: name[Math.floor(Math.random() * name.length)],
+      billing_address_city: 'City' + i,
+      billing_address_country: 'County' + i,
+      billing_address_postalcode: i,
+      billing_address_state: 'State' + i,
+      billing_address_street: "Street" + i,
+      longitude: Math.floor(Math.random() * 60),
+      latitude: Math.floor(Math.random() * 60),
+      opportunities
+    });
+  }
+
+  let filter_the_accounts_by_exercise = accounts.filter((account) => account.opportunities.filter((opportunity) => opportunity.amount >= 1000).length > 0);
+  res.json(filter_the_accounts_by_exercise);
 });
 module.exports = router;
