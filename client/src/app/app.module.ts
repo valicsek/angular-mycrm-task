@@ -9,6 +9,15 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard';
 import { AuthService } from './auth.service';
 import { CookieService } from 'ngx-cookie-service';
+import { AgmCoreModule } from '@agm/core';
+
+// UI PART
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatCardModule } from '@angular/material/card';
+import { MatToolbarModule, MatToolbarBase } from '@angular/material/toolbar';
+import { MatGridListModule, MatListModule, MatFormFieldModule, MatInputModule } from '@angular/material'
+import { MatButtonModule } from '@angular/material/button';
 
 const ROUTE_PATHS = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -26,7 +35,19 @@ const ROUTE_PATHS = [
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot(ROUTE_PATHS)
+    RouterModule.forRoot(ROUTE_PATHS),
+    AgmCoreModule.forRoot({
+      apiKey: ''
+    }),
+
+    MatCardModule,
+    MatToolbarModule,
+    MatGridListModule,
+    MatListModule,
+    MatInputModule,
+    MatFormFieldModule,
+    BrowserAnimationsModule,
+    MatButtonModule
   ],
   providers: [
     AuthService,

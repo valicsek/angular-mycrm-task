@@ -16,4 +16,17 @@ Relevant examples: Authentication, filtering records, fetch related records.
 Auto generated API documentation: https://e7920-93.mycrmspace.de/rest/v10/help
 
 # My approach
-So basically, I prefer to separate the server side and a client side to another ports.
+I separated the server side and a client side to another ports.
+- I could not use the Sugar API because I get the following error:
+"Bad data passed in; ..."
+- Because of this I use generate random data, with random opportunities.
+- There are two components: Login and Dashboard.
+
+## Frontend Framework
+- Angular with Material
+  
+## Login
+- Login username/password: demo
+- The authentication is hardcoded in the backend side.
+- I use cookies to remember after the user has logged in.
+- If the user clicks to the logout ref, then the cookie will be destroyed.

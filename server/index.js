@@ -5,11 +5,52 @@ const routes = require('./routes');
 const config = require('../config');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const axios = require('axios');
 
+/**
+ * Need for authenticate ourself before requesting the API Service from Sugar
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
+const authSugar = (req, res, next) => {
+  next();
+
+  const axios_config = {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
+  }
+  const requestBody = {
+    params: {
+      grant_type: "password",
+      client_id: "sugar",
+      username: config.server.api.username,
+      password: config.server.api.password,
+      platform: "custom"
+    }
+  }
+
+  axios.post(`${config.server.api.url}/oauth2/token`, requestBody, axios_config)
+    .then(body => {
+      next();
+    })
+    .catch(err => {
+      console.log(err);
+      res.sendStatus(500);
+    })
+};
+
+/** Needed because of we want to handle the POSTs during routes */
 app.use(bodyParser.json());
+/** Without this, we are not able to use the sugar REST API */
+app.use(authSugar);
+/** No 'Access-Control-Allow-Origin' header is present on the requested resource error */
 app.use(cors({
-  origin: config.client.url
+  origin: `http://localhost:${config.client.port}`,
+  credentials: true
 }));
+
 app.use('/', routes);
 
 app.listen(config.server.port, (req, res) => {

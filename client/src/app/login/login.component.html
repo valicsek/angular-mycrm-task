@@ -1,5 +1,15 @@
-<form (submit)="authenticateUser($event)">
-  <input type="text" placeholder="Username" id="username">
-  <input type="current-password" placeholder="Password" id="password">
-  <input type="submit" value="Log in">
-</form>
+<mat-card>
+  <H1>Login</H1>
+  <form (submit)="authenticateUser($event)">
+    <mat-form-field>
+      <input matInput type="text" placeholder="Username" id="username">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="password" placeholder="Password" id="password">
+    </mat-form-field>
+    <button mat-raised-button type="submit">Log in</button>
+  </form>
+  <div class="bottom-tag">
+    Angular + Node.JS
+  </div>
+</mat-card>
