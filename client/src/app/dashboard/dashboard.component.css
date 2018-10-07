@@ -2,3 +2,7 @@ agm-map {
   height: 500px;
   width: 100%;
 }
+
+.mat-list-item-box {
+  border: 1px solid #f8f8f8;
+}
