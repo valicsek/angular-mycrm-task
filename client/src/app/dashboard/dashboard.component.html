@@ -8,7 +8,10 @@
       <h1>Account List</h1>
     </mat-list-item>
     <mat-list-item>
-      <p>Note: If you can't see enough Account, refresh the site.</p>
+      <mat-spinner *ngIf="isLoading"></mat-spinner>
+    </mat-list-item>
+    <mat-list-item>
+      <h1>Name</h1>
     </mat-list-item>
     <mat-list-item role="listitem" *ngFor="let account of accounts;" class="mat-list-item-box">
       {{account.name}}
@@ -17,8 +20,8 @@
   <mat-grid-list cols="2" rowheight="200px">
     <mat-grid-tile>
       <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
-        <agm-marker *ngFor="let account of accounts;" [latitude]="account.latitude" [longitude]="account.longitude"
-          [id]="account.account_id" (markerClick)="onMarkerClicked($event)">
+        <agm-marker *ngFor="let account of accounts; index as i;" [latitude]="account.latitude" [longitude]="account.longitude"
+          [id]="i" (markerClick)="onMarkerClicked($event)">
         </agm-marker>
       </agm-map>
     </mat-grid-tile>
@@ -36,6 +39,9 @@
         </mat-list-item>
         <mat-list-item role="listitem">
           <h1>Opportunity details</h1>
+        </mat-list-item>
+        <mat-list-item>
+          <mat-spinner *ngIf="isOpportunityDetailsLoading"></mat-spinner>
         </mat-list-item>
         <mat-list-item role="listitem">Opportunity name: {{selectedOpportunity.name}}</mat-list-item>
         <mat-list-item role="listitem">Sales stage: {{selectedOpportunity.sales_stage}}</mat-list-item>

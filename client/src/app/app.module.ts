@@ -18,6 +18,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule, MatToolbarBase } from '@angular/material/toolbar';
 import { MatGridListModule, MatListModule, MatFormFieldModule, MatInputModule } from '@angular/material'
 import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const ROUTE_PATHS = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -47,7 +48,8 @@ const ROUTE_PATHS = [
     MatInputModule,
     MatFormFieldModule,
     BrowserAnimationsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     AuthService,

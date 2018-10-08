@@ -6,6 +6,7 @@ const config = require('../config');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const axios = require('axios');
+const session = require('express-session');
 
 /**
  * Need for authenticate ourself before requesting the API Service from Sugar
@@ -14,25 +15,30 @@ const axios = require('axios');
  * @param {*} next 
  */
 const authSugar = (req, res, next) => {
-  next();
 
   const axios_config = {
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
+      'Content-Type': 'application/json'
     }
   }
   const requestBody = {
-    params: {
-      grant_type: "password",
-      client_id: "sugar",
-      username: config.server.api.username,
-      password: config.server.api.password,
-      platform: "custom"
-    }
+    "grant_type": "password",
+    "client_id": "sugar",
+    "client_secret": "",
+    "username": config.server.api.username,
+    "password": config.server.api.password,
+    "platform": "custom"
   }
+
+  // Don't request again if we have a token
+  if (req.session.access_token) next();
 
   axios.post(`${config.server.api.url}/oauth2/token`, requestBody, axios_config)
     .then(body => {
+      if (body.data.access_token) {
+        req.session.access_token = body.data.access_token;
+        console.log('mySugar Authentication accepted');
+      }
       next();
     })
     .catch(err => {
@@ -41,6 +47,12 @@ const authSugar = (req, res, next) => {
     })
 };
 
+/** I use session for storing the OAuthentication. */
+app.use(session({
+  secret: "dontTellToAnyone",
+  resave: true,
+  saveUninitialized: true
+}));
 /** Needed because of we want to handle the POSTs during routes */
 app.use(bodyParser.json());
 /** Without this, we are not able to use the sugar REST API */

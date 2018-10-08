@@ -10,6 +10,10 @@ import { AuthService } from '../auth.service';
     styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+    /** Variable for determine when to show spinner */
+    isLoading = true;
+    /** Variable for determine when to show the opportunity spinner */
+    isOpportunityDetailsLoading = false;
     /** The start latitude of the map */
     latitude = 12;
     /** The start longitude of the map */
@@ -46,7 +50,7 @@ export class DashboardComponent implements OnInit {
     private setupData() {
 
         let account: Account = {
-            account_id: -999,
+            id: -999,
             name: '',
             billing_address_city: '',
             billing_address_country: '',
@@ -62,13 +66,14 @@ export class DashboardComponent implements OnInit {
         this.selectedOpportunity = {
             id: -999,
             name: '',
+            date_entered: '',
+            date_modified: '',
             sales_status: '',
-            sales_stage: '',
             amount: 0
         }
 
         this.mapService.getAccounts().subscribe(
-            (data: Account[]) => this.accounts = data,
+            (data: Account[]) => { this.accounts = data, this.isLoading = false },
             error => alert('Error during requesting accounts!, Do not forget to run Node.js API')
         );
 
@@ -87,10 +92,15 @@ export class DashboardComponent implements OnInit {
      * Called when user clicks to one marker.
      */
     onMarkerClicked(event) {
-        let marker_id = event.id();
-        if (marker_id) {
-            this.selectedAccount = this.accounts.filter(account => account.account_id == marker_id)[0];
-            this.selectedOpportunity = this.selectedAccount.opportunities[0];
+        this.isOpportunityDetailsLoading = true;
+        let account_index = event.id();
+        if (account_index) {
+            this.selectedAccount = this.accounts[account_index];
+            this.mapService.getOpportunities(this.selectedAccount.id).subscribe(
+                (data: Opportunity[]) => { this.selectedOpportunity = data[data.length - 1]; this.isOpportunityDetailsLoading = false; },
+                error => alert('Error during requesting accounts!, Do not forget to run Node.js API')
+            );
+            // this.selectedOpportunity = this.selectedAccount.opportunities[0];
         }
     }
 }

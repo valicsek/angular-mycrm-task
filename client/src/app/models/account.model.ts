@@ -1,7 +1,7 @@
 import { Opportunity } from "./opportunity.model";
 
 export interface Account {
-  account_id: number;
+  id: number;
   name: string;
   billing_address_street: string;
   billing_address_city: string;
