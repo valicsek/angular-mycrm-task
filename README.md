@@ -17,9 +17,6 @@ Auto generated API documentation: https://e7920-93.mycrmspace.de/rest/v10/help
 
 # My approach
 I separated the server side and a client side to another ports.
-- I could not use the Sugar API because I get the following error:
-"Bad data passed in; ..."
-- Because of this I use generate random data, with random opportunities.
 - There are two components: Login and Dashboard.
 
 ## Frontend Framework
